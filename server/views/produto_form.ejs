@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Produto</title>
+  </head>
+  <body>
+    <a href="/estoque">← Voltar</a>
+    <h1><%= produto ? 'Editar' : 'Novo' %> Produto</h1>
+    <form
+      method="POST"
+      action="<%= produto ? ('/estoque/editar/' + produto.cod_produto) : '/estoque/novo' %>"
+    >
+      <div>
+        <label>Cod produto</label>
+        <input name="cod_produto" value="<%= produto ? produto.cod_produto : ''
+        %>" <%= produto ? 'readonly' : '' %> required>
+      </div>
+      <div>
+        <label>Nome</label>
+        <input
+          name="nome_produto"
+          value="<%= produto ? produto.nome_produto : '' %>"
+          required
+        />
+      </div>
+      <div>
+        <label>Categoria</label>
+        <input
+          name="categoria"
+          value="<%= produto ? produto.categoria : '' %>"
+        />
+      </div>
+      <div>
+        <label>Subcategoria</label>
+        <input
+          name="subcategoria"
+          value="<%= produto ? produto.subcategoria : '' %>"
+        />
+      </div>
+      <div>
+        <label>Preço</label>
+        <input
+          name="preco_real"
+          type="number"
+          step="0.01"
+          value="<%= produto ? produto.preco_real : '' %>"
+        />
+      </div>
+      <div>
+        <label>Estoque</label>
+        <input
+          name="estoque"
+          type="number"
+          value="<%= produto ? produto.estoque : 0 %>"
+        />
+      </div>
+      <div>
+        <label>Disponibilidade</label>
+        <input
+          name="disponibilidade"
+          value="<%= produto ? produto.disponibilidade : 'Pronta Entrega' %>"
+        />
+      </div>
+      <button type="submit">Salvar</button>
+    </form>
+  </body>
+</html>

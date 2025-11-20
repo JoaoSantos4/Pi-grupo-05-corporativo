@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Expedição</title>
+  </head>
+  <body>
+    <a href="/corporativo">← Voltar</a>
+    <h1>Expedição</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Venda ID</th>
+          <th>Cliente</th>
+          <th>Produto</th>
+          <th>Qtd</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% dados.forEach(d => { %>
+        <tr>
+          <td><%= d.id %></td>
+          <td><%= d.nome_cliente %></td>
+          <td><%= d.produto_id %></td>
+          <td><%= d.quantidade %></td>
+          <td><%= d.data_venda %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

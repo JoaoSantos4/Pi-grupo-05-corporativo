@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login Corporativo</title>
+  </head>
+  <body
+    style="
+      font-family: Arial;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+    "
+  >
+    <div
+      style="
+        width: 380px;
+        background: #0f1720;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      "
+    >
+      <h2 style="color: #60a5fa">Painel Corporativo</h2>
+      <% if (erro) { %>
+      <div style="color: #ff6b6b; margin-bottom: 8px"><%= erro %></div>
+      <% } %>
+      <form method="POST" action="/login">
+        <input
+          name="usuario"
+          placeholder="Usuário"
+          required
+          style="
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #0b1220;
+            color: #fff;
+          "
+        />
+        <input
+          name="senha"
+          type="password"
+          placeholder="Senha"
+          required
+          style="
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #0b1220;
+            color: #fff;
+          "
+        />
+        <button
+          style="
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+          "
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

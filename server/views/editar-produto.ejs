@@ -1,0 +1,27 @@
+<h1>Editar Produto</h1>
+
+<form action="/estoque/editar/<%= produto.cod_produto %>" method="POST">
+  <label>Nome</label>
+  <input
+    name="nome_produto"
+    value="<%= produto.nome_produto %>"
+    required
+  /><br />
+
+  <label>Categoria</label>
+  <input name="categoria" value="<%= produto.categoria %>" required /><br />
+
+  <label>Subcategoria</label>
+  <input name="subcategoria" value="<%= produto.subcategoria %>" /><br />
+
+  <label>Preço</label>
+  <input name="preco_real" value="<%= produto.preco_real %>" required /><br />
+
+  <label>Disponibilidade</label>
+  <input name="disponibilidade" value="<%= produto.disponibilidade %>" /><br />
+
+  <label>Estoque</label>
+  <input name="estoque" value="<%= produto.estoque %>" required /><br />
+
+  <button type="submit">Salvar</button>
+</form>

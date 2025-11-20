@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Estoque</title>
+  </head>
+  <body style="font-family: Arial">
+    <a href="/corporativo" style="display: inline-block; margin: 12px"
+      >← Voltar</a
+    >
+    <h1>Estoque</h1>
+    <a
+      href="/estoque/novo"
+      style="
+        padding: 8px 12px;
+        background: #111;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+      "
+      >+ Novo Produto</a
+    >
+    <table
+      border="0"
+      cellpadding="8"
+      cellspacing="0"
+      style="width: 100%; margin-top: 12px; border-collapse: collapse"
+    >
+      <thead style="background: #f3f4f6">
+        <tr>
+          <th>Produto</th>
+          <th>Estoque</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% produtos.forEach(p => { %>
+        <tr>
+          <td><%= p.nome_produto %> (cod: <%= p.cod_produto %>)</td>
+          <td style="text-align: center"><%= p.estoque %></td>
+          <td style="text-align: center">
+            <a href="/estoque/editar/<%= p.cod_produto %>">Editar</a>
+            <form
+              action="/estoque/deletar/<%= p.cod_produto %>"
+              method="POST"
+              style="display: inline; margin-left: 8px"
+            >
+              <button type="submit" onclick="return confirm('Deletar?')">
+                Deletar
+              </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Corporativo</title>
+  </head>
+  <body style="font-family: Arial; background: #fff; color: #111">
+    <header
+      style="
+        padding: 12px 20px;
+        background: #111;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      "
+    >
+      <div style="font-weight: 800; color: #60a5fa">
+        MUSCLE WAY - Corporativo
+      </div>
+      <div>
+        <span style="margin-right: 12px">Olá, <%= user.usuario %></span>
+        <a href="/logout" style="color: #fff">Sair</a>
+      </div>
+    </header>
+
+    <main style="padding: 20px">
+      <h1>Painel Corporativo</h1>
+      <div style="display: flex; gap: 12px; margin-top: 18px">
+        <a
+          href="/estoque"
+          style="
+            padding: 10px 16px;
+            background: #111;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+          "
+          >Estoque</a
+        >
+        <a
+          href="/pagar"
+          style="
+            padding: 10px 16px;
+            background: #111;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+          "
+          >Financeiro</a
+        >
+        <a
+          href="/relatorios"
+          style="
+            padding: 10px 16px;
+            background: #111;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+          "
+          >Relatórios</a
+        >
+        <a
+          href="/expedicao"
+          style="
+            padding: 10px 16px;
+            background: #111;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+          "
+          >Expedição</a
+        >
+      </div>
+    </main>
+  </body>
+</html>
