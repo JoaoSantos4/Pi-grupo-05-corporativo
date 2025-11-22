@@ -1,12 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>Financeiro</title>
+    <title>Pagar - Relatório</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .card {
+        background: #fff;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+      }
+      .w-100 {
+        width: 100%;
+      }
+      .w-50 {
+        width: 48%;
+      }
+    </style>
   </head>
+
   <body>
-    <a href="/corporativo">← Voltar</a>
-    <h1>Total das Vendas</h1>
+    <h1>Total Faturado</h1>
     <h2>R$ <%= Number(total).toFixed(2) %></h2>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="card w-50">
+        <h3>Produtos mais vendidos (quantidade)</h3>
+        <canvas id="produtosChart" width="400" height="250"></canvas>
+      </div>
+
+      <div class="card w-50">
+        <h3>Lucro por produto (R$)</h3>
+        <canvas id="lucroChart" width="400" height="250"></canvas>
+      </div>
+    </div>
+
+    <div class="card w-100" style="margin-top: 20px">
+      <h3>Top clientes por gasto</h3>
+      <canvas id="clientesChart" width="800" height="240"></canvas>
+    </div>
+
+    <script>
+      const produtos = JSON.parse(`<%- JSON.stringify(produtos || []) %>`);
+      const clientes = JSON.parse(`<%- JSON.stringify(clientes || []) %>`);
+
+      const prodLabels = produtos.map((p) => p.nome);
+      const prodQtd = produtos.map((p) => p.qtd_vendida);
+
+      new Chart(document.getElementById("produtosChart"), {
+        type: "bar",
+        data: {
+          labels: prodLabels,
+          datasets: [
+            {
+              label: "Quantidade vendida",
+              data: prodQtd,
+              backgroundColor: "#3b82f6",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+        },
+      });
+
+      const lucroLabels = produtos.map((p) => p.nome);
+      const lucroData = produtos.map((p) => Number(p.lucro || 0));
+
+      new Chart(document.getElementById("lucroChart"), {
+        type: "bar",
+        data: {
+          labels: lucroLabels,
+          datasets: [
+            {
+              label: "Lucro (R$)",
+              data: lucroData,
+              backgroundColor: "#22c55e",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+        },
+      });
+
+      const clientesLabels = clientes.map(
+        (c) => c.nome_cliente || c.email || "Cliente"
+      );
+      const clientesGastos = clientes.map((c) => Number(c.gasto || 0));
+
+      new Chart(document.getElementById("clientesChart"), {
+        type: "bar",
+        data: {
+          labels: clientesLabels,
+          datasets: [
+            {
+              label: "Gasto (R$)",
+              data: clientesGastos,
+              backgroundColor: "#f97316",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          indexAxis: "y",
+          plugins: { legend: { display: false } },
+        },
+      });
+    </script>
   </body>
 </html>

@@ -14,4 +14,4 @@ db.connect((err) => {
     console.log("MySQL conectado com sucesso (corporativo)");
 });
 
-module.exports = db;
+module.exports = db;  

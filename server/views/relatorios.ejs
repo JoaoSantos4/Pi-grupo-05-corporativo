@@ -8,7 +8,7 @@
     <a href="/corporativo">← Voltar</a>
     <h1>Relatórios / Logs</h1>
     <table style="width: 100%; border-collapse: collapse">
-      <thead style="background: #f3f4f6">
+      <thead>
         <tr>
           <th>Ação</th>
           <th>Usuário</th>
@@ -16,13 +16,14 @@
           <th>Data</th>
         </tr>
       </thead>
+
       <tbody>
         <% logs.forEach(l => { %>
         <tr>
           <td><%= l.operacao %></td>
           <td><%= l.usuario %></td>
-          <td><%= l.produto_id %></td>
-          <td><%= l.data %></td>
+          <td><%= l.produto_id %> - <%= l.nome_produto %></td>
+          <td><%= new Date(l.data).toLocaleString("pt-BR") %></td>
         </tr>
         <% }) %>
       </tbody>

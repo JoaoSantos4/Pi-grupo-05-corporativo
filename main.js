@@ -1,49 +1,61 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
-const { spawn } = require("child_process");
+const http = require("http");
 
-let serverProcess = null;
+let serverStarted = false;
 
-function criarJanela() {
-    const win = new BrowserWindow({
-        width: 1200,
-        height: 800,
-        autoHideMenuBar: true,
-        webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true
-        }
+// Impede múltiplas instâncias
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
+
+function waitForServer(url, callback) {
+  const check = () => {
+    http.get(url, () => {
+      console.log("✔ Servidor respondeu");
+      callback();
+    }).on("error", () => {
+      console.log("⏳ Aguardando servidor iniciar...");
+      setTimeout(check, 500);
     });
+  };
+  check();
+}
 
-    win.loadURL("http://localhost:3010/");
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 1000,
+    height: 720,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js")
+    }
+  });
+
+  win.loadURL("http://127.0.0.1:3020");
 }
 
 app.whenReady().then(() => {
+  process.env.ELECTRON_IS_PACKAGED = app.isPackaged ? "true" : "false";
 
-    const serverPath = path.join(__dirname, "server", "app.js");
+  if (!serverStarted) {
+    serverStarted = true;
 
-    console.log("[Electron] Iniciando servidor:", serverPath);
+    const serverPath = app.isPackaged
+      ? path.join(process.resourcesPath, "app", "server", "app.js")   // <-- CORRIGIDO
+      : path.join(__dirname, "server", "app.js");
 
-    serverProcess = spawn("node", [serverPath], {
-        cwd: process.cwd(),
-        shell: true
-    });
+    console.log("Iniciando servidor em:", serverPath);
+    require(serverPath);
+  }
 
-    serverProcess.stdout.on("data", (data) => {
-        console.log("[SERVIDOR]: " + data.toString());
-    });
-
-    serverProcess.stderr.on("data", (data) => {
-        console.error("[ERRO SERVIDOR]: " + data.toString());
-    });
-
-    setTimeout(() => {
-        criarJanela();
-    }, 800);
-
+  waitForServer("http://127.0.0.1:3020", () => {
+    console.log("🚀 Servidor online — abrindo janela");
+    createWindow();
+  });
 });
 
 app.on("window-all-closed", () => {
-    if (serverProcess) serverProcess.kill();
-    app.quit();
+  app.quit();
 });
