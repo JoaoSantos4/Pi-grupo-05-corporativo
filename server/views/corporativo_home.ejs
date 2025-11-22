@@ -1,76 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <title>Corporativo</title>
-  </head>
-  <body style="font-family: Arial; background: #fff; color: #111">
-    <header
-      style="
-        padding: 12px 20px;
-        background: #111;
+
+    <style>
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background: #373c41;
+        color: #111827;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      /* HEADER */
+      header {
+        padding: 16px 28px;
+        background: #111827;
         color: #fff;
         display: flex;
         justify-content: space-between;
         align-items: center;
-      "
-    >
-      <div style="font-weight: 800; color: #60a5fa">
-        MUSCLE WAY - Corporativo
-      </div>
-      <div>
-        <span style="margin-right: 12px">Olá, <%= user.usuario %></span>
-        <a href="/logout" style="color: #fff">Sair</a>
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      header .logo {
+        font-weight: 800;
+        font-size: 18px;
+        color: #60a5fa;
+        letter-spacing: 0.5px;
+      }
+
+      header .user-area {
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      header a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+
+      header a:hover {
+        opacity: 0.75;
+      }
+
+      span {
+        padding-right: 30px;
+      }
+      /* MAIN */
+      main {
+        width: 60%;
+        height: 100%;
+        padding: 32px;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        color: white;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+      }
+
+      /* BOTÕES DO PAINEL */
+      .menu-grid {
+        display: flex;
+        width: 1000px;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .menu-item {
+        width: calc(30% - 12px);
+        padding: 16px 20px;
+        background: #2563eb;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.25s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-item:hover {
+        background: #1f59d6;
+        transform: translateY(-3px);
+      }
+
+      .sair {
+        background: #ef4444;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+      /* Responsividade */
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">MUSCLE WAY — Corporativo</div>
+
+      <div class="user-area">
+        <span>Olá, <%= user.usuario %></span>
+        <a class="sair" href="/logout">Sair</a>
       </div>
     </header>
 
-    <main style="padding: 20px">
+    <main>
       <h1>Painel Corporativo</h1>
-      <div style="display: flex; gap: 12px; margin-top: 18px">
-        <a
-          href="/estoque"
-          style="
-            padding: 10px 16px;
-            background: #111;
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-          "
-          >Estoque</a
-        >
-        <a
-          href="/pagar"
-          style="
-            padding: 10px 16px;
-            background: #111;
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-          "
-          >Financeiro</a
-        >
-        <a
-          href="/relatorios"
-          style="
-            padding: 10px 16px;
-            background: #111;
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-          "
-          >Relatórios</a
-        >
-        <a
-          href="/expedicao"
-          style="
-            padding: 10px 16px;
-            background: #111;
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-          "
-          >Expedição</a
-        >
+
+      <div class="menu-grid">
+        <a href="/estoque" class="menu-item">Estoque</a>
+        <a href="/pagar" class="menu-item">Financeiro</a>
+        <a href="/relatorios" class="menu-item">Relatórios</a>
+        <a href="/expedicao" class="menu-item">Expedição</a>
       </div>
     </main>
   </body>

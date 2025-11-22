@@ -1,50 +1,152 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Estoque</title>
-  </head>
-  <body style="font-family: Arial">
-    <a href="/corporativo" style="display: inline-block; margin: 12px"
-      >← Voltar</a
-    >
-    <h1>Estoque</h1>
-    <a
-      href="/estoque/novo"
-      style="
+
+<head>
+  <meta charset="utf-8" />
+  <title>Estoque</title>
+  <style>
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: #373c41;
+      padding: 24px;
+      color: #1a1a1a;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* botão "voltar" */
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.1em;;
+    }
+
+    /* botão: novo produto */
+    .btn-primary {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #111827;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: #000;
+      transform: translateY(-2px);
+    }
+
+    /* tabela */
+    table {
+      width: 100%;
+      margin-top: 22px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    thead {
+      background: #f3f4f6;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    td {
+      padding: 14px 12px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 15px;
+      color: #1f2937;
+    }
+
+    tr:hover td {
+      background: #f9fafb;
+    }
+
+    /* ações */
+    .btn-action {
+      color: #2563eb;
+      font-weight: 500;
+    }
+
+    .btn-delete {
+      padding: 6px 12px;
+      background: #dc2626;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+      background: #b91c1c;
+    }
+
+    /* alinhamento */
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body style="font-family: Arial">
+  <a href="/corporativo" style="color: white; display: inline-block; margin: 12px">← Voltar</a>
+  <h1>Estoque</h1>
+  <a href="/estoque/novo" style="
         padding: 8px 12px;
-        background: #111;
-        color: #fff;
+        background: #1e64b3;
+        color: #ffffff;
+        font-weight: bolder;
         border-radius: 6px;
         text-decoration: none;
-      "
-      >+ Novo Produto</a
-    >
-    <table
-      border="0"
-      cellpadding="8"
-      cellspacing="0"
-      style="width: 100%; margin-top: 12px; border-collapse: collapse"
-    >
-      <thead style="background: #f3f4f6">
+      ">+ Novo Produto</a>
+
+  <table border="0" cellpadding="8" cellspacing="0" style="font-weight: bolder; width: 100%; margin-top: 12px; border-collapse: collapse">
+    <thead style="background: #f3f4f6">
+      <tr>
+        <th style="border: 1px solid black;font-size: 20px;"">Produto</th>
+        <th style="border: 1px solid black;font-size: 20px;"">Estoque</th>
+        <th style="border: 1px solid black; font-size: 20px;">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% produtos.forEach(p=> { %>
         <tr>
-          <th>Produto</th>
-          <th>Estoque</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% produtos.forEach(p => { %>
-        <tr>
-          <td><%= p.nome_produto %> (cod: <%= p.cod_produto %>)</td>
-          <td style="text-align: center"><%= p.estoque %></td>
-          <td style="text-align: center">
+          <td style="border: 1px solid black">
+            <%= p.nome_produto %> (cod: <%= p.cod_produto %>)
+          </td>
+          <td style="text-align: end; border: 1px solid black">
+            <%= p.estoque %>
+          </td>
+          <td style="text-align: end; border: 1px solid black">
             <a href="/estoque/editar/<%= p.cod_produto %>">Editar</a>
-            <form
-              action="/estoque/deletar/<%= p.cod_produto %>"
-              method="POST"
-              style="display: inline; margin-left: 8px"
-            >
+            <form action="/estoque/deletar/<%= p.cod_produto %>" method="POST"
+              style="display: inline; margin-left: 8px">
               <button type="submit" onclick="return confirm('Deletar?')">
                 Deletar
               </button>
@@ -52,7 +154,8 @@
           </td>
         </tr>
         <% }) %>
-      </tbody>
-    </table>
-  </body>
+    </tbody>
+  </table>
+</body>
+
 </html>

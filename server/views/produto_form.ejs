@@ -4,6 +4,95 @@
     <meta charset="utf-8" />
     <title>Produto</title>
   </head>
+  <style>
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: #373c41;
+      padding: 30px;
+      color: #111827;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      margin-top: 14px;
+      margin-bottom: 24px;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+    }
+
+    form {
+      background: #fff;
+      padding: 28px;
+      border-radius: 10px;
+      max-width: 520px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form div {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 15px;
+      color: #374151;
+    }
+
+    input {
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.2s;
+      background: #fafafa;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    input[readonly] {
+      background: #e5e7eb;
+      cursor: not-allowed;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      background: #000;
+      transform: translateY(-2px);
+    }
+  </style>
   <body>
     <a href="/estoque">← Voltar</a>
     <h1><%= produto ? 'Editar' : 'Novo' %> Produto</h1>
@@ -14,7 +103,7 @@
       <div>
         <label>Cod produto</label>
         <input name="cod_produto" value="<%= produto ? produto.cod_produto : ''
-        %>" <%= produto ? 'readonly' : '' %> required>
+        %>" <%=produto ? 'readonly' : '' %> required>
       </div>
       <div>
         <label>Nome</label>

@@ -10,7 +10,15 @@
       body {
         font-family: Arial;
         padding: 20px;
-        background: #f5f5f5;
+        background: #373c41;
+      }
+
+      h1 {
+        color: white;
+        letter-spacing: 0.1em;
+      }
+      h2 {
+        color: #ffffff;
       }
       .row {
         display: flex;
@@ -33,6 +41,11 @@
   </head>
 
   <body>
+    <a
+      href="/corporativo"
+      style="color: white; display: inline-block; margin: 12px"
+      >← Voltar</a
+    >
     <h1>Total Faturado</h1>
     <h2>R$ <%= Number(total).toFixed(2) %></h2>
 
