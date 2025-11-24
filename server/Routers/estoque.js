@@ -24,19 +24,23 @@ router.post('/novo', (req, res) => {
 
     db.query(
       `INSERT INTO Produtos 
-       (cod_produto, nome_produto, categoria, subcategoria, preco_real, disponibilidade, estoque) 
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+       (cod_produto, nome_produto, categoria, subcategoria, preco_real, preco_custo, disponibilidade, estoque) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         cod_produto,
         nome_produto,
         categoria,
         subcategoria,
         preco_real || 0,
+        0,                        // <-- preco_custo obrigatório na tabela
         'Pronta Entrega',
         estoque || 0
       ],
       (err2) => {
-        if (err2) return res.status(500).send('Erro ao adicionar produto');
+        if (err2) {
+          console.log("SQL ERROR:", err2); // <--- MOSTRA O ERRO REAL NO CONSOLE
+          return res.status(500).send('Erro ao adicionar produto');
+        }
         res.redirect('/estoque');
       }
     );
